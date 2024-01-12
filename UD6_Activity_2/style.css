@@ -1,0 +1,51 @@
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div{
+    color: white;
+    border: 1px solid black;
+    margin: 10px;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(180deg);
+    
+}
+@keyframes color {
+    0%{color: white};
+    100%{color:black};
+}
+div.revealed{
+    transition: transform 0.5s;
+    transform: rotateY(0deg);
+    color: black;
+    animation-name: color;
+    animation-duration: 0.5s;
+}
+div.cleared{
+    background-color: black;
+}
+.azul{
+    color: blue;
+}
+.rojo{
+    color: red;
+}
+section{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+span{
+    display: flex;
+}
+p{
+    margin: 2px;
+    font-size: xx-large;
+}

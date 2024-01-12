@@ -1,0 +1,69 @@
+/*main element where everything appends.*/
+main{
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    column-gap: 30px;
+    row-gap: 10px;
+    justify-content: center;
+    
+}
+/*Container for the cards*/
+div{
+    border: 1px solid black;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(180deg);   
+}
+div.revealed{
+    transition: transform 0.5s;
+    transform: rotateY(0deg);
+}
+div.cleared{
+    transition: transform 0.5s;
+    transform: rotateY(0deg);
+}
+/*for the images inside the cards*/
+img{
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+img.revealed{
+    animation-name: image;
+    animation-duration: 0.5s;
+    opacity: 1;
+}
+img.cleared{
+    animation-name: image;
+    animation-duration: 0.5s;
+    opacity: 1;
+}
+
+@keyframes image {
+    0%{opacity: 0};
+    100%{opacity: 1};
+}
+
+/* Scorekeeping and Message Section */
+section{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+span{
+    display: flex;
+}
+p{
+    margin: 2px;
+    font-size: xx-large;
+}
+.azul{
+    color: blue;
+}
+.rojo{
+    color: red;
+}
