@@ -29,4 +29,6 @@ $(document).ready(function(){
     $("textarea").on("keyup", function () {
         $("textarea").countCharacters();
     });
+
+    $("textarea").countCharacters();
 });
