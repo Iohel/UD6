@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+.column{
+    border: 2px solid black;
+    height: 400px;
+    width: 200px;
+    margin: 20px;
+}
+.red{
+    background-color: #A50000;
+    color: white;
+}
+.red:hover{
+    background-color: #c20000;
+    color: white;
+}
+.blue{
+    background-color: blue;
+    color: white;
+}
+.yellow{
+    background-color: #535300;
+    color: white;
+}
+.green{
+    background-color: #005E00;
+    color: white;
+}
+.postit{
+    width: 150px; height: 150px; padding: 0.5em;
+    border: 2px solid black;
+}
