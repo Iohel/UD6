@@ -29,6 +29,41 @@
     color: white;
 }
 .postit{
-    width: 150px; height: 150px; padding: 0.5em;
+    width: 150px; 
+    height: 150px;
     border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+input{
+    width: 100px;
+    height: fit-content;
+    
+}
+.posthead{
+    display: flex;
+}
+button{
+    height: fit-content;
+    margin: 2px;
+}
+
+
+
+h6{
+    margin: 5px;
+}
+textarea{
+    height: 100px;
+    font-size: 10px;
+    width: 125px;
+    resize: none;
+}
+.minimized{
+    height: 25px;
+    padding-top: 5px;
+}
+i{
 }

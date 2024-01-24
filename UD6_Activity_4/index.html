@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post It</title>
     <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 </head>
     <body>
         <header>
-                <button>Crear Post It</button>
-                <input type="number" id="columnas" value="4">
+            
 
         </header>
         <div class="container">
             <div class="column red"><h1>0</h1></div>
-            <div class="column blue"><h1>0</h1></div>
+            <div class="column yellow"><h1>0</h1></div>
             <div class="column green"><h1>0</h1></div>
         </div>
-        <div class="postit red ">
-            <p>a</p>
-        </div>
-        <div class="postit red">
-            <p>a</p>
-        </div>
+        
         <footer>
-            <div class="picker">Chosse Color</div>
-            <div class="picker">Chosse Color</div>
-            <div class="picker">Chosse Color</div>
-            <div class="picker">Chosse Color</div>
+            <input type="text" placeholder="Title" maxlength="10" id="title">
+            <button id="create">Crear Post It</button>
         </footer>
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
