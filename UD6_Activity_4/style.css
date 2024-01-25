@@ -49,9 +49,6 @@ button{
     height: fit-content;
     margin: 2px;
 }
-
-
-
 h6{
     margin: 5px;
 }
@@ -64,6 +61,4 @@ textarea{
 .minimized{
     height: 25px;
     padding-top: 5px;
-}
-i{
 }
