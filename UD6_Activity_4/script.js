@@ -1,17 +1,9 @@
 $(document).ready(function () {
     
-    /* 
-        Pending:
-        Es mostra dialog / modal amb opcions per confirmar o cancel·lar.
-
-        S'ha emprat efecte en maximitzar i minimitzar un post-it.
-
-        Comentaris, explicació codi, codi entenedor, codi no repetit, ús de funcions, etc.
-    */
+    //general variables
     let postit;
-    let colors = ["red","yellow","green"];
     let i;
-   // clickEvents();
+    //drop events
     $(".column.red").droppable({
         accept: ".postit.red",
         drop: function(){
@@ -31,6 +23,7 @@ $(document).ready(function () {
             }  
         }
     })
+
     $(".column.yellow").droppable({
         accept: ".postit.yellow",
         drop: function(){
@@ -52,6 +45,7 @@ $(document).ready(function () {
             
         }
     })
+
     $(".column.green").droppable({
         accept: ".postit.green",
         drop: function(){
@@ -70,6 +64,8 @@ $(document).ready(function () {
             $(this).find("h1").html(i);
         }
     })
+
+    //creating post it event
     $("#create").on("click", function () {
 
         let color;
@@ -108,45 +104,92 @@ $(document).ready(function () {
                 "<textarea name='a' id='' maxlength='175'></textarea>"+
             "</div>"
         );
-        $(".postit").draggable({
+
+        $(".postit.red").draggable({
             drag:function(){
                 postit = this;
+                let color = "red";
+                $(this).data("color", color);
             }
         });
+
+        $(".postit.yellow").draggable({
+            drag:function(){
+                postit = this;
+                let color = "yellow";
+                $(this).data("color", color);
+            }
+        });
+
+        $(".postit.green").draggable({
+            drag:function(){
+                postit = this;
+                let color = "green";
+                $(this).data("color",color);
+            }
+        });
+        
         $(".cross").off();
         $(".minus").off();
         $(".square").off();
         
+        
 
-        $(".cross").on("click", function(){  
+        $(".cross").on("click", function(){
+            postit = this;
+            $( "#dialog-confirm" ).dialog({
+                dialogClass: "no-close",
+                draggable: true,
+                resizable: false,
+                height: 100,
+                width: 100,
+                modal: true,
+                buttons: {
+                "Delete item": function() {
+                    if($(postit).offsetParent().data("dropped")){
+                        console.log($(postit).offsetParent());
+                        let color = $(postit).offsetParent().data("color");
+                        console.log(color);
+                        let i = +($(".column."+color).find("h1").html());
+                        console.log(i);
+                        i--
+                        $(".column."+color).find("h1").html(i);
+                        $(postit).offsetParent().remove();
+                    }else{
+                        $(postit).offsetParent().remove();
+                    }
+                    $( this ).dialog( "close" );
+                },
+                Cancel: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
             
-            if($(this).offsetParent().data("dropped")){
-                console.log($(this).offsetParent());
-                let i = +($(".column.").find("h1").html());
-                console.log(i);
-                i--;
-                $(".column.yellow").find("h1").html(i);
-                $(this).offsetParent().remove();
-            }else{
-                $(this).offsetParent().remove();
-            }
+            
+            
         })
         $(".minus").on("click", function(){
             let parent = $(this).offsetParent();
             $(parent).addClass("minimized");
-            $(parent.children("textarea")).attr("hidden","");
-            $(this).attr("hidden", true)
-            $(this).siblings(".square").attr("hidden", false)
+            $(this).attr("hidden", true);
+            $(this).siblings(".square").attr("hidden", false);
+            setTimeout(()=>{
+                $(parent.children("textarea")).attr("hidden","");
+            },950)
+            
             
         })
         $(".square").on("click", function(){
             let parent = $(this).offsetParent();
             $(parent).removeClass("minimized");
+            $(this).attr("hidden", true);
+            $(this).siblings(".minus").attr("hidden", false);
+            
             $(parent.children("textarea")).attr("hidden",false);
-            $(this).attr("hidden", true)
-            $(this).siblings(".minus").attr("hidden", false)
             
         })
     });
     
+
 });
