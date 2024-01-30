@@ -2,9 +2,9 @@ $(document).ready(function () {
     
     //general variables
     let postit;
-    let i;
     let colors = ["red","yellow","green"];
-    //drop events
+    let i;
+   // clickEvents();
     $(".column.red").droppable({
         accept: ".postit.red",
         drop: function(){
