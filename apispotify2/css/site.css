@@ -1,0 +1,16 @@
+
+#results{
+  margin-top: 2em;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+}
+
+form label{
+  display: inline-block;
+  width: 30%;
+}
+.artist{
+  display: flex;
+  flex-direction: column;
+}
