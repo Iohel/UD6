@@ -1,8 +1,10 @@
-
+*{
+  text-align: center;
+}
 #results{
   margin-top: 2em;
   display: flex;
-  display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -12,5 +14,6 @@ form label{
 }
 .artist{
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
