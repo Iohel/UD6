@@ -17,21 +17,63 @@ Spotify.prototype.getArtist = function (artist) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    $("#results").html("");;
+    $("#results").html("");
     let artists =response.artists.items;
-    artists.forEach(artist => {
-      if(artist.images[2] == null){
+    
+    if(artists.length != 0){
+      artists.forEach(artist => {
+        if(artist.images[2] == null){
+          
+        }else{
+          $("#results").append("<div class='artist'>"+
+          "<h2><a href='' data-id="+artist.id+" class='artistId'>"+artist.name+"</a></h2>"+
+          "<h3>Popularity: "+artist.popularity+"</h3>"+
+          "<img src="+artist.images[2].url+
+          " height="+artist.images[2].height+
+          " width="+artist.images[2].width+"></img>"+
+          "</div>");
+        }
+      });
+    }else{
+      $("#results").append("<p>No artists with this name have been found.</p>");
+     
+    }
+     
+  });
+};
+Spotify.prototype.getTracks = function (track) {
+
+  $.ajax({
+    type: "GET",
+    url: this.apiUrl + 'v1/search?type=track&q=' + track,
+    headers: {
+      'Authorization' : 'Bearer ' + access_token
+    },
+  }).done( function(response){
+    $("#tracks").html("");
+    let tracks =response.tracks.items;
+    
+    if(tracks.length != 0){
+      tracks.forEach(track => {
         
-      }else{
-        $("#results").append("<div class='artist'>"+
-        "<h1><a href='' data-id="+artist.id+" class='artistId'>"+artist.name+"</a></h1>"+
-        "<h2>Popularity: "+artist.popularity+"</h2>"+
-        "<img src="+artist.images[2].url+
-        " height="+artist.images[2].height+
-        " width="+artist.images[2].width+"></img>"+
-        "</div>");
-      }
-    });
+        if(track.album.images[1] == null){
+          
+        }else{
+          $("#tracks").append("<div class='artist'>"+
+          "<h2>"+track.name+"</h2>"+
+          "<h3>Popularity: "+track.popularity+"</h3>"+
+          "<h5>Album: "+"<a href='' data-id="+track.album.id+" class='albumId'>"+track.album.name+"</a>"+"</h5>"+
+          "<img src="+track.album.images[1].url+
+          " height="+track.album.images[1].height+
+          " width="+track.album.images[1].width+"></img>"+
+          "</div>");
+        }
+      });
+    }else{
+      $("#tracks").append("<p>No tracks with this name have been found.</p>");
+     
+    }
+     
   });
 };
 
@@ -45,17 +87,16 @@ Spotify.prototype.getArtistById = function (artistId,artistName) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    console.log(response.items);
-    console.log(artistName);
+    
     $("#results").html("");
     let albums = response.items;
     albums.forEach(album=>{
       
       $("#results").append(
-        "<div>"+
-          "<h1>"+"<a href='' data-id="+album.id+" class='albumId'>"+album.name+"</a></h1>"+
+        "<div class = 'album'>"+
+          "<h3>"+"<a href='' data-id="+album.id+" class='albumId'>"+album.name+"</a></h3>"+
           "<h6>"+artistName+"</h6>"+
-          "<img src="+album.images[1].url+" height="+album.images[1].height+" width="+album.images[1].width+">"+
+          "<img src="+album.images[2].url+" height="+album.images[2].height+" width="+album.images[2].width+">"+
         "</div>"
       );
     })
@@ -63,19 +104,32 @@ Spotify.prototype.getArtistById = function (artistId,artistName) {
 };
 
 //Get tracks of an album, given the id of the Album
-Spotify.prototype.getAlbumById = function(albumId){
+Spotify.prototype.getAlbumById = function(albumId, albumName){
   $.ajax({
     type: "GET",
-    url: this.apiUrl + 'v1/albums/' + albumId + '/tracks',
+    url: this.apiUrl + 'v1/albums/' + albumId + '/tracks?limit=50',
     headers: {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done(function(response){
-    console.log(response.items);
-    console.clear();
+    $("#tracks").html("");
+    $("#tracks").append("<h1>"+albumName+"</h1>"+"<h2>"+response.items[0].artists[0].name+"</h2>");
+    
     let tracks = response.items;
     tracks.forEach(track=>{
-      console.log(track.name);
+      let minutos = Math.floor((track.duration_ms/1000/60)%60);
+      let segundos = Math.floor((track.duration_ms/1000)%60);
+      if(segundos<10){
+        segundos = "0"+segundos;
+      }
+      
+      $("#tracks").append(
+        "<div class='track'>"+
+          "<p>"+track.track_number+"</p>"+
+          "<p>"+track.name+"</p>"+
+          "<p>"+minutos+":"+segundos+"</p>"+
+        "</div>"
+      );
     })
   });
 }
@@ -99,6 +153,7 @@ $(function () {
 
   $('#bgetArtist').on('click', function () {
     spotify.getArtist($('#artistName').val());
+    spotify.getTracks($('#artistName').val());
   });
 
   $('#results').on('click', '.artistId', function (e) {
@@ -108,11 +163,15 @@ $(function () {
   });
   
   $('#results').on('click', '.albumId', function (e) {
-    console.log("test");
+    
+    e.preventDefault();
+    spotify.getAlbumById($(this).attr("data-id"),$(this).text());
+  });
+  
+  $('#tracks').on('click', '.albumId', function (e) {
+    
     e.preventDefault();
     spotify.getAlbumById($(this).attr("data-id"),$(this).text());
   });
 
-  
-  
 });

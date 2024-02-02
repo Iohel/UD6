@@ -1,13 +1,24 @@
 *{
   text-align: center;
+  background-color: rgb(29, 29, 29);
+  color: white;
 }
+
 #results{
   margin-top: 2em;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 2px solid green;
+  padding: 1em;
+  border-radius: 10px;
 }
-
+#tracks{
+  margin-top: 2em;
+  padding: 1em;
+  border: 2px solid green;
+  border-radius: 10px;
+}
 form label{
   display: inline-block;
   width: 30%;
@@ -16,4 +27,74 @@ form label{
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 4em;
+}
+.album{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 4em;
+  
+}
+
+.track{
+  display: flex;
+  justify-content: space-between;
+  
+  padding: 1em;
+}
+p{
+  margin-right: 1em;
+  margin-left: 1em;
+}
+h1{
+  color: green;
+}
+a:hover{
+  color: green;
+}
+
+@media (min-width: 30em) {
+  *{
+    text-align: center;
+  }
+  #outputs{
+    display: flex;
+    justify-content: space-around;
+  }
+  #results{
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid green;
+    padding: 1em;
+    border-radius: 10px;
+  }
+  #tracks{
+    margin-top: 2em;
+    padding: 1em;
+    border: 2px solid green;
+    border-radius: 10px;
+  }
+  form label{
+    display: inline-block;
+    width: 30%;
+  }
+  .artist{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .track{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid green;
+    padding: 1em;
+  }
+  p{
+    margin-right: 1em;
+    margin-left: 1em;
+  }
 }
